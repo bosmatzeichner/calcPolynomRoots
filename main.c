@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <vss.h>
 #include "computingRootsCalc.h"
 
 int main() {
@@ -27,12 +26,13 @@ struct input *getInput() {
     return parameters;
 }
 long double createParamTolerance() {
-    long double tolerance;
+    long double tolerance = 0.0;
     scanf("epsilon_=_ %Lf", &tolerance);
+    //printf("%Lf", tolerance);
     return tolerance;
 }
 int createParamOrder() {
-    int order;
+    int order = 0;
     scanf("\n order_=_%d", &order);
     return order;
 }

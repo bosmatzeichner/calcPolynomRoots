@@ -3,4 +3,4 @@ project(computingRootsCalc C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(computingRootsCalc main.c computingRootsCalc.h calcFunctions.cpp)
+add_executable(computingRootsCalc main.c computingRootsCalc.h calcFunctions.c)
