@@ -66,14 +66,14 @@ complex_num eval_poly(complex_num x, complex_num *coeffs, int order){
     res.real = 0.0;
     res.image = 0.0;
     for (int i = order; i >= 0 ; i--){
-        res = cmplx_mul_add(res, x, coefs[i]);
+        res = cmplx_mul_add(res, x, coeffs[i]);
     }
 }
 complex_num *prepare_deriv_coeffs(complex_num *coeffs , int order){
     complex_num *coefsPrepared = calloc((size_t) order+1, sizeof(complex_num));
     for (int i = order; i>0; i-- ){
-        coefsPrepared[i].real = coefs[i].real * i;
-        coefsPrepared[i].image = coefs[i].image;
+        coefsPrepared[i].real = coeffs[i].real * i;
+        coefsPrepared[i].image = coeffs[i].image;
     }
     return  coefsPrepared;
 }
