@@ -5,14 +5,16 @@
 #include "computingRootsCalc.h"
 
 complex_num calcRoot(complex_num currentRoot, struct polynom *poly, long double tolerance) {
+    poly->coeffsForDeriv = prepare_deriv_coeffs(poly->coefficients,poly->order);
     while(sqrtNorm_bigger_then_tolerance(currentRoot, tolerance)){
-         currentRoot = eval_next_seq_element(currentRoot, poly);
+        currentRoot = eval_next_seq_element(currentRoot, poly);
     }
+    free(poly->coeffsForDeriv);
     return currentRoot;
 }
 complex_num eval_next_seq_element(complex_num root, struct polynom *poly) {
     complex_num valueAtPoint = eval_poly(root,poly->coefficients,poly->order);
-    complex_num derivAtPoint = eval_deriv(root,poly->coefficients,poly->order);
+    complex_num derivAtPoint = eval_poly(root,poly->coeffsForDeriv,poly->order-1);
     complex_num nextElement = eval_element(root,valueAtPoint,derivAtPoint);
     return nextElement;
 }
@@ -54,13 +56,12 @@ complex_num cmplx_mul_add(complex_num res, complex_num x, complex_num coeff) {
     result = cmplx_add(result,coeff);
     return result;
 }
-
 complex_num eval_element(complex_num nthZ, complex_num polyAtPointZ, complex_num derivAtPointZ){
     complex_num divPolyByDeriv = cmplx_div(polyAtPointZ, derivAtPointZ);
     complex_num nextElemnt = cmplx_sub(nthZ, divPolyByDeriv);
     return nextElemnt;
 }
-complex_num eval_poly(complex_num x, complex_num *coefs, int order){
+complex_num eval_poly(complex_num x, complex_num *coeffs, int order){
     complex_num res;
     res.real = 0.0;
     res.image = 0.0;
@@ -68,21 +69,11 @@ complex_num eval_poly(complex_num x, complex_num *coefs, int order){
         res = cmplx_mul_add(res, x, coefs[i]);
     }
 }
-complex_num eval_deriv(complex_num x, complex_num *coefs, int order){
-    complex_num *coefsPrepared = prepare_deriv_coefs(coefs,order);
-    complex_num deriv = eval_deriv_coefsPrepared(x, coefsPrepared,order);
-    free(coefsPrepared);
-    return deriv;
-}
-complex_num *prepare_deriv_coefs(complex_num *coefs , int order){
+complex_num *prepare_deriv_coeffs(complex_num *coeffs , int order){
     complex_num *coefsPrepared = calloc((size_t) order+1, sizeof(complex_num));
     for (int i = order; i>0; i-- ){
         coefsPrepared[i].real = coefs[i].real * i;
         coefsPrepared[i].image = coefs[i].image;
     }
     return  coefsPrepared;
-}
-complex_num eval_deriv_coefsPrepared(complex_num x,complex_num *coefsPrepared, int order){
- complex_num result = eval_poly(x,coefsPrepared,order-1);
-    return result;
 }
