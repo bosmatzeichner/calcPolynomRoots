@@ -27,8 +27,8 @@ struct input *getInput() ;
 long double createParamTolerance() ;
 int createParamOrder() ;
 complex_num *createParamCoefficients(int order) ;
-int getCoeffIndex();
-complex_num createComplexNum() ;
+void initCoeff(complex_num* coeffs, int order);
+//complex_num createComplexNum() ;
 complex_num createInitialVal();
 //Calc----------------------
 complex_num calcRoot(complex_num currentRoot, struct polynom *poly, long double tolerance) ;

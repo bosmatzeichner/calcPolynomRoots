@@ -26,39 +26,33 @@ struct input *getInput() {
     return parameters;
 }
 long double createParamTolerance() {
-    long double tolerance = 0.0;
-    scanf("epsilon_=_ %Lf", &tolerance);
+    long double tolerance = 0.0 ;
+    scanf("\nepsilon = %Lf\0", &tolerance);
     //printf("%Lf", tolerance);
     return tolerance;
 }
 int createParamOrder() {
     int order = 0;
-    scanf("\n order_=_%d", &order);
+    scanf("\norder = %d\0", &order);
     return order;
 }
 complex_num *createParamCoefficients(int order) {
     complex_num *coefficients = calloc((size_t) (order + 1), sizeof(complex_num));
-    int i = getCoeffIndex();
-    while (order >= 0){
-        coefficients[i] = createComplexNum();
-        order--;
-    }
+    initCoeff(coefficients, order);
     return coefficients;
 }
-int getCoeffIndex() {
+void initCoeff(complex_num* coeffs, int order) {
     int index;
-    scanf("\n coeff_%d", &index);
-    return index;
-}
-complex_num createComplexNum() {
     complex_num cmplx;
-    scanf("%Lf", &cmplx.real);
-    scanf("%Lf", &cmplx.image);
-    return cmplx;
+    while (order >= 0){
+         scanf("\ncoeff %d = %Lf %Lf\0", &index, &cmplx.real, &cmplx.image);
+         coeffs[index] = cmplx;
+         order--;
+    }
 }
 complex_num createInitialVal() {
-    complex_num initial_val;
-    scanf("\n initial_=_%Lf %Lf", &initial_val.real, &initial_val.image);
+    complex_num initial_val = {0.0 , 0.0};
+    scanf("\ninitial = %Lf %Lf\0", &initial_val.real, &initial_val.image);
     return initial_val;
 }
 void execute_print(complex_num root) {

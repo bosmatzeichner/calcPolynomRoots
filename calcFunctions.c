@@ -27,25 +27,25 @@ long double eval_euclidean_sqrt_norm(complex_num root) {
 }
 
 complex_num cmplx_add(complex_num first, complex_num second){
-    complex_num res;
+    complex_num res={0.0 , 0.0};
     res.real = first.real + second.real;
     res.image = first.image + second.image;
     return res;
 }
 complex_num cmplx_sub(complex_num first, complex_num second){
-    complex_num res;
+    complex_num res={0.0 , 0.0};
     res.real = first.real - second.real;
     res.image = first.image - second.image;
     return res;
 }
 complex_num cmplx_mul(complex_num first, complex_num second){
-    complex_num res;
+    complex_num res={0.0 , 0.0};
     res.real = first.real*second.real - first.image*second.image;
     res.image = first.real*second.image+ second.real*first.image;
     return res;
 }
 complex_num cmplx_div(complex_num first, complex_num second){
-    complex_num res;
+    complex_num res={0.0 , 0.0};
     long double divisor = (second.real*second.real + second.image*second.image);
     res.real = (first.real*second.real - first.image*second.image)/divisor;
     res.image = (first.image*second.real - first.real*second.image)/divisor;
@@ -62,7 +62,7 @@ complex_num eval_element(complex_num nthZ, complex_num polyAtPointZ, complex_num
     return nextElemnt;
 }
 complex_num eval_poly(complex_num x, complex_num *coeffs, int order){
-    complex_num res;
+    complex_num res={0.0 , 0.0};
     res.real = 0.0;
     res.image = 0.0;
     for (int i = order; i >= 0 ; i--){
