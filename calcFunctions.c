@@ -1,6 +1,4 @@
-//
-// Created by USER on 17/04/2018.
-//
+#include <stdio.h>
 #include <stdlib.h>
 #include "computingRootsCalc.h"
 
@@ -70,7 +68,7 @@ complex_num eval_poly(complex_num x, complex_num *coeffs, int order){
     }
 }
 complex_num *prepare_deriv_coeffs(complex_num *coeffs , int order){
-    complex_num *coefsPrepared = calloc((size_t) order+1, sizeof(complex_num));
+    complex_num *coefsPrepared = calloc((order+1), sizeof(complex_num));
     for (int i = order; i>0; i-- ){
         coefsPrepared[i].real = coeffs[i].real * i;
         coefsPrepared[i].image = coeffs[i].image;
