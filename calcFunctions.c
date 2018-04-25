@@ -18,16 +18,16 @@ complex_num eval_next_seq_element(complex_num root, struct polynom *poly) {
     complex_num nextElement = eval_element(root,valueAtPoint,derivAtPoint);
     return nextElement;
 }
-int sqrtNorm_bigger_then_tolerance(complex_num root, long double tolerance) {
-    long double sqrtNorm = eval_euclidean_sqrt_norm (root);
-    int bool =(sqrtNorm >= tolerance);
+int sqrtNorm_bigger_then_tolerance(complex_num funcAtPoint, long double tolerance) {
+    long double sqrtNorm = eval_euclidean_sqrt_norm (funcAtPoint);
+    int bool =(sqrtNorm >= tolerance*tolerance);
     return bool;
 }
 
-long double eval_euclidean_sqrt_norm(complex_num root) {
-    return root.real*root.real + root.image*root.image;
+long double eval_euclidean_sqrt_norm(complex_num funcAtPoint) {
+    long double sqrt = funcAtPoint.real*funcAtPoint.real + funcAtPoint.image*funcAtPoint.image;
+    return sqrt;
 }
-
 complex_num cmplx_add(complex_num first, complex_num second){
     complex_num res={0.0 , 0.0};
     res.real = first.real + second.real;
@@ -73,6 +73,7 @@ complex_num eval_poly(complex_num x, complex_num *coeffs, int order){
     }
     return res;
 }
+
 complex_num *prepare_deriv_coeffs(complex_num *coeffs , int order){
     complex_num *coefsPrepared = calloc((order+1), sizeof(complex_num));
     for (int i = order; i>0; i-- ){

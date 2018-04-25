@@ -8,13 +8,11 @@ int main() {
     execute_print(root);
     free_input(parameters);
 }
-
 void free_input(struct input *parameters) {
     free(parameters->poly->coefficients);
     free(parameters->poly);
     free(parameters);
 }
-
 struct input *getInput() {
     struct input *parameters = calloc(1, sizeof(struct input));
     parameters->poly = calloc(1,sizeof(struct polynom));
@@ -25,14 +23,12 @@ struct input *getInput() {
     parameters->initial_val = createInitialVal();
     return parameters;
 }
-
 long double createParamTolerance() {
     long double tolerance = 0.0 ;
     scanf("\nepsilon = %Lf\0", &tolerance);
     //printf("%Lf", tolerance);
     return tolerance;
 }
-
 int createParamOrder() {
     int order = 0;
     scanf("\norder = %d\0", &order);
@@ -43,7 +39,6 @@ complex_num *createParamCoefficients(int order) {
     initCoeff(coefficients, order);
     return coefficients;
 }
-
 void initCoeff(complex_num* coeffs, int order) {
     int index;
     complex_num cmplx;
@@ -59,5 +54,5 @@ complex_num createInitialVal() {
     return initial_val;
 }
 void execute_print(complex_num root) {
-    printf("root = %Lf %Lf", root.real, root.image);
+    printf("root = %.16Lf %.16Lf", root.real, root.image);
 }
