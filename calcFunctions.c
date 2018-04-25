@@ -4,8 +4,10 @@
 
 complex_num calcRoot(complex_num currentRoot, struct polynom *poly, long double tolerance) {
     poly->coeffsForDeriv = prepare_deriv_coeffs(poly->coefficients,poly->order);
-    while(sqrtNorm_bigger_then_tolerance(currentRoot, tolerance)){
+    complex_num valueAtPoint = eval_poly(currentRoot,poly->coefficients,poly->order);
+    while(sqrtNorm_bigger_then_tolerance(valueAtPoint, tolerance)){
         currentRoot = eval_next_seq_element(currentRoot, poly);
+        valueAtPoint = eval_poly(currentRoot,poly->coefficients,poly->order);
     }
     free(poly->coeffsForDeriv);
     return currentRoot;
@@ -18,8 +20,10 @@ complex_num eval_next_seq_element(complex_num root, struct polynom *poly) {
 }
 int sqrtNorm_bigger_then_tolerance(complex_num root, long double tolerance) {
     long double sqrtNorm = eval_euclidean_sqrt_norm (root);
-    return ( sqrtNorm >= tolerance);
+    int bool =(sqrtNorm >= tolerance);
+    return bool;
 }
+
 long double eval_euclidean_sqrt_norm(complex_num root) {
     return root.real*root.real + root.image*root.image;
 }
@@ -54,6 +58,7 @@ complex_num cmplx_mul_add(complex_num res, complex_num x, complex_num coeff) {
     result = cmplx_add(result,coeff);
     return result;
 }
+
 complex_num eval_element(complex_num nthZ, complex_num polyAtPointZ, complex_num derivAtPointZ){
     complex_num divPolyByDeriv = cmplx_div(polyAtPointZ, derivAtPointZ);
     complex_num nextElemnt = cmplx_sub(nthZ, divPolyByDeriv);
@@ -66,12 +71,13 @@ complex_num eval_poly(complex_num x, complex_num *coeffs, int order){
     for (int i = order; i >= 0 ; i--){
         res = cmplx_mul_add(res, x, coeffs[i]);
     }
+    return res;
 }
 complex_num *prepare_deriv_coeffs(complex_num *coeffs , int order){
     complex_num *coefsPrepared = calloc((order+1), sizeof(complex_num));
     for (int i = order; i>0; i-- ){
-        coefsPrepared[i].real = coeffs[i].real * i;
-        coefsPrepared[i].image = coeffs[i].image;
+        coefsPrepared[i-1].real = coeffs[i].real * i;
+        coefsPrepared[i-1].image = coeffs[i].image;
     }
     return  coefsPrepared;
 }
