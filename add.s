@@ -456,271 +456,203 @@ eval_euclidean_sqrt_norm:
 	.globl	cmplx_add
 	.type	cmplx_add, @function
 cmplx_mul_add:
-.LFB10:
-	.cfi_startproc
 	push	rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset 6, -16
 	mov	rbp, rsp
-	.cfi_def_cfa_register 6
 	sub	rsp, 96
-	mov	QWORD PTR [rbp-56], rdi
-	mov	rax, QWORD PTR fs:40
-	mov	QWORD PTR [rbp-8], rax
-	xor	eax, eax
+	mov	QWORD [rbp-56], rdi
 	lea	rax, [rbp-48]
-	push	QWORD PTR [rbp+72]
-	push	QWORD PTR [rbp+64]
-	push	QWORD PTR [rbp+56]
-	push	QWORD PTR [rbp+48]
-	push	QWORD PTR [rbp+40]
-	push	QWORD PTR [rbp+32]
-	push	QWORD PTR [rbp+24]
-	push	QWORD PTR [rbp+16]
+	push QWORD [rbp+72]
+	push QWORD [rbp+64]
+	push QWORD [rbp+56]
+	push QWORD [rbp+48]
+	push QWORD [rbp+40]
+	push QWORD [rbp+32]
+	push QWORD [rbp+24]
+	push QWORD [rbp+16]
 	mov	rdi, rax
-	call	cmplx_mul
+	call cmplx_mul
 	add	rsp, 64
 	lea	rax, [rbp-96]
-	push	QWORD PTR [rbp+104]
-	push	QWORD PTR [rbp+96]
-	push	QWORD PTR [rbp+88]
-	push	QWORD PTR [rbp+80]
-	push	QWORD PTR [rbp-24]
-	push	QWORD PTR [rbp-32]
-	push	QWORD PTR [rbp-40]
-	push	QWORD PTR [rbp-48]
+	push QWORD[rbp+104]
+	push QWORD [rbp+96]
+	push QWORD[rbp+88]
+	push QWORD [rbp+80]
+	push QWORD [rbp-24]
+	push QWORD [rbp-32]
+	push QWORD [rbp-40]
+	push QWORD [rbp-48]
 	mov	rdi, rax
-	call	cmplx_add
+	call cmplx_add
 	add	rsp, 64
-	mov	rax, QWORD PTR [rbp-96]
-	mov	QWORD PTR [rbp-48], rax
-	mov	rax, QWORD PTR [rbp-88]
-	mov	QWORD PTR [rbp-40], rax
-	mov	rax, QWORD PTR [rbp-80]
-	mov	QWORD PTR [rbp-32], rax
-	mov	rax, QWORD PTR [rbp-72]
-	mov	QWORD PTR [rbp-24], rax
-	mov	rax, QWORD PTR [rbp-56]
-	mov	rdx, QWORD PTR [rbp-48]
-	mov	QWORD PTR [rax], rdx
-	mov	rdx, QWORD PTR [rbp-40]
-	mov	QWORD PTR [rax+8], rdx
-	mov	rdx, QWORD PTR [rbp-32]
-	mov	QWORD PTR [rax+16], rdx
-	mov	rdx, QWORD PTR [rbp-24]
-	mov	QWORD PTR [rax+24], rdx
-	mov	rax, QWORD PTR [rbp-56]
-	mov	rcx, QWORD PTR [rbp-8]
-	xor	rcx, QWORD PTR fs:40
-	je	.L23
-	call	__stack_chk_fail
-.L23:
-	leave
-	.cfi_def_cfa 7, 8
+	mov	rax, QWORD [rbp-96]
+	mov	QWORD [rbp-48], rax
+	mov	rax, QWORD [rbp-88]
+	mov	QWORD [rbp-40], rax
+	mov	rax, QWORD [rbp-80]
+	mov	QWORD [rbp-32], rax
+	mov	rax, QWORD [rbp-72]
+	mov	QWORD [rbp-24], rax
+	mov	rax, QWORD [rbp-56]
+	mov	rdx, QWORD [rbp-48]
+	mov	QWORD [rax], rdx
+	mov	rdx, QWORD [rbp-40]
+	mov	QWORD [rax+8], rdx
+	mov	rdx, QWORD [rbp-32]
+	mov	QWORD [rax+16], rdx
+	mov	rdx, QWORD [rbp-24]
+	mov	QWORD [rax+24], rdx
+	mov	rax, QWORD [rbp-56]
 	ret
-	.cfi_endproc
-.LFE10:
-	.size	cmplx_mul_add, .-cmplx_mul_add
-	.globl	eval_element
-	.type	eval_element, @function
+
 eval_element:
-.LFB11:
-	.cfi_startproc
-	push	rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset 6, -16
+	push rbp
 	mov	rbp, rsp
-	.cfi_def_cfa_register 6
 	sub	rsp, 96
-	mov	QWORD PTR [rbp-88], rdi
-	mov	rax, QWORD PTR fs:40
-	mov	QWORD PTR [rbp-8], rax
-	xor	eax, eax
+	mov	QWORD [rbp-88], rdi
 	lea	rax, [rbp-80]
-	push	QWORD PTR [rbp+104]
-	push	QWORD PTR [rbp+96]
-	push	QWORD PTR [rbp+88]
-	push	QWORD PTR [rbp+80]
-	push	QWORD PTR [rbp+72]
-	push	QWORD PTR [rbp+64]
-	push	QWORD PTR [rbp+56]
-	push	QWORD PTR [rbp+48]
+	push QWORD [rbp+104]
+	push QWORD [rbp+96]
+	push QWORD [rbp+88]
+	push QWORD [rbp+80]
+	push QWORD [rbp+72]
+	push QWORD [rbp+64]
+	push QWORD [rbp+56]
+	push QWORD [rbp+48]
 	mov	rdi, rax
-	call	cmplx_div
+	call cmplx_div
 	add	rsp, 64
 	lea	rax, [rbp-48]
-	push	QWORD PTR [rbp-56]
-	push	QWORD PTR [rbp-64]
-	push	QWORD PTR [rbp-72]
-	push	QWORD PTR [rbp-80]
-	push	QWORD PTR [rbp+40]
-	push	QWORD PTR [rbp+32]
-	push	QWORD PTR [rbp+24]
-	push	QWORD PTR [rbp+16]
+	push QWORD [rbp-56]
+	push QWORD [rbp-64]
+	push QWORD [rbp-72]
+	push QWORD [rbp-80]
+	push QWORD [rbp+40]
+	push QWORD [rbp+32]
+	push QWORD [rbp+24]
+	push QWORD [rbp+16]
 	mov	rdi, rax
-	call	cmplx_sub
+	call cmplx_sub
 	add	rsp, 64
-	mov	rax, QWORD PTR [rbp-88]
-	mov	rdx, QWORD PTR [rbp-48]
-	mov	QWORD PTR [rax], rdx
-	mov	rdx, QWORD PTR [rbp-40]
-	mov	QWORD PTR [rax+8], rdx
-	mov	rdx, QWORD PTR [rbp-32]
-	mov	QWORD PTR [rax+16], rdx
-	mov	rdx, QWORD PTR [rbp-24]
-	mov	QWORD PTR [rax+24], rdx
-	mov	rax, QWORD PTR [rbp-88]
-	mov	rcx, QWORD PTR [rbp-8]
-	xor	rcx, QWORD PTR fs:40
-	je	.L26
-	call	__stack_chk_fail
-.L26:
-	leave
-	.cfi_def_cfa 7, 8
+	mov	rax, QWORD [rbp-88]
+	mov	rdx, QWORD [rbp-48]
+	mov QWORD [rax], rdx
+	mov	rdx, QWORD [rbp-40]
+	mov QWORD [rax+8], rdx
+	mov	rdx, QWORD [rbp-32]
+	mov QWORD [rax+16], rdx
+	mov	rdx, QWORD [rbp-24]
+	mov QWORD [rax+24], rdx
+	mov	rax, QWORD [rbp-88]
 	ret
-	.cfi_endproc
-.LFE11:
-	.size	eval_element, .-eval_element
-	.globl	eval_poly
-	.type	eval_poly, @function
+
 eval_poly:
-.LFB12:
-	.cfi_startproc
 	push	rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset 6, -16
 	mov	rbp, rsp
-	.cfi_def_cfa_register 6
 	sub	rsp, 96
 	mov	QWORD PTR [rbp-72], rdi
 	mov	QWORD PTR [rbp-80], rsi
 	mov	DWORD PTR [rbp-84], edx
-	mov	rax, QWORD PTR fs:40
-	mov	QWORD PTR [rbp-8], rax
-	xor	eax, eax
 	fldz
-	fstp	TBYTE PTR [rbp-48]
+	fstp TWORD [rbp-48]
 	fldz
-	fstp	TBYTE PTR [rbp-32]
+	fstp TWORD [rbp-32]
 	fldz
-	fstp	TBYTE PTR [rbp-48]
+	fstp TWORD [rbp-48]
 	fldz
-	fstp	TBYTE PTR [rbp-32]
-	mov	eax, DWORD PTR [rbp-84]
-	mov	DWORD PTR [rbp-52], eax
+	fstp TWORD [rbp-32]
+	mov	eax, DWORD [rbp-84]
+	mov	DWORD [rbp-52], eax
 	jmp	.L28
 .L29:
-	mov	eax, DWORD PTR [rbp-52]
+	mov	eax, DWORD [rbp-52]
 	cdqe
 	sal	rax, 5
 	mov	rdx, rax
-	mov	rax, QWORD PTR [rbp-80]
+	mov	rax, QWORD [rbp-80]
 	add	rax, rdx
 	lea	rdx, [rbp-48]
-	push	QWORD PTR [rax+24]
-	push	QWORD PTR [rax+16]
-	push	QWORD PTR [rax+8]
-	push	QWORD PTR [rax]
-	push	QWORD PTR [rbp+40]
-	push	QWORD PTR [rbp+32]
-	push	QWORD PTR [rbp+24]
-	push	QWORD PTR [rbp+16]
-	push	QWORD PTR [rbp-24]
-	push	QWORD PTR [rbp-32]
-	push	QWORD PTR [rbp-40]
-	push	QWORD PTR [rbp-48]
+	push QWORD [rax+24]
+	push QWORD [rax+16]
+	push QWORD [rax+8]
+	push QWORD [rax]
+	push QWORD [rbp+40]
+	push QWORD [rbp+32]
+	push QWORD [rbp+24]
+	push QWORD [rbp+16]
+	push QWORD [rbp-24]
+	push QWORD [rbp-32]
+	push QWORD [rbp-40]
+	push QWORD [rbp-48]
 	mov	rdi, rdx
-	call	cmplx_mul_add
+	call cmplx_mul_add
 	add	rsp, 96
-	sub	DWORD PTR [rbp-52], 1
+	sub	DWORD [rbp-52], 1
 .L28:
-	cmp	DWORD PTR [rbp-52], 0
+	cmp	DWORD [rbp-52], 0
 	jns	.L29
-	mov	rax, QWORD PTR [rbp-72]
-	mov	rdx, QWORD PTR [rbp-48]
-	mov	QWORD PTR [rax], rdx
-	mov	rdx, QWORD PTR [rbp-40]
-	mov	QWORD PTR [rax+8], rdx
-	mov	rdx, QWORD PTR [rbp-32]
-	mov	QWORD PTR [rax+16], rdx
-	mov	rdx, QWORD PTR [rbp-24]
-	mov	QWORD PTR [rax+24], rdx
-	mov	rax, QWORD PTR [rbp-72]
-	mov	rcx, QWORD PTR [rbp-8]
-	xor	rcx, QWORD PTR fs:40
-	je	.L31
-	call	__stack_chk_fail
-.L31:
-	leave
-	.cfi_def_cfa 7, 8
+	mov	rax, QWORD [rbp-72]
+	mov	rdx, QWORD [rbp-48]
+	mov	QWORD [rax], rdx
+	mov	rdx, QWORD [rbp-40]
+	mov	QWORD [rax+8], rdx
+	mov	rdx, QWORD [rbp-32]
+	mov	QWORD [rax+16], rdx
+	mov	rdx, QWORD [rbp-24]
+	mov	QWORD [rax+24], rdx
+	mov	rax, QWORD [rbp-72]
 	ret
-	.cfi_endproc
-.LFE12:
-	.size	eval_poly, .-eval_poly
-	.globl	prepare_deriv_coeffs
-	.type	prepare_deriv_coeffs, @function
+
 prepare_deriv_coeffs:
-.LFB13:
-	.cfi_startproc
-	push	rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset 6, -16
+	push rbp
 	mov	rbp, rsp
-	.cfi_def_cfa_register 6
 	sub	rsp, 32
-	mov	QWORD PTR [rbp-24], rdi
-	mov	DWORD PTR [rbp-28], esi
-	mov	eax, DWORD PTR [rbp-28]
+	mov	QWORD [rbp-24], rdi
+	mov	DWORD [rbp-28], esi
+	mov	eax, DWORD [rbp-28]
 	add	eax, 1
 	cdqe
 	mov	esi, 32
 	mov	rdi, rax
-	call	calloc
-	mov	QWORD PTR [rbp-8], rax
-	mov	eax, DWORD PTR [rbp-28]
-	mov	DWORD PTR [rbp-12], eax
+	call calloc
+	mov	QWORD [rbp-8], rax
+	mov	eax, DWORD [rbp-28]
+	mov	DWORD [rbp-12], eax
 	jmp	.L33
 .L34:
-	mov	eax, DWORD PTR [rbp-12]
+	mov	eax, DWORD [rbp-12]
 	cdqe
 	sal	rax, 5
 	lea	rdx, [rax-32]
-	mov	rax, QWORD PTR [rbp-8]
+	mov	rax, QWORD [rbp-8]
 	add	rax, rdx
-	mov	edx, DWORD PTR [rbp-12]
-	movsx	rdx, edx
+	mov	edx, DWORD [rbp-12]
+	movsx rdx, edx
 	mov	rcx, rdx
 	sal	rcx, 5
-	mov	rdx, QWORD PTR [rbp-24]
+	mov	rdx, QWORD [rbp-24]
 	add	rdx, rcx
-	fld	TBYTE PTR [rdx]
-	fild	DWORD PTR [rbp-12]
-	fmulp	st(1), st
-	fstp	TBYTE PTR [rax]
-	mov	eax, DWORD PTR [rbp-12]
+	fld	TWORD [rdx]
+	fild DWORD [rbp-12]
+	fmulp st1, st0
+	fstp TWORD [rax]
+	mov	eax, DWORD [rbp-12]
 	cdqe
 	sal	rax, 5
 	lea	rdx, [rax-32]
-	mov	rax, QWORD PTR [rbp-8]
+	mov	rax, QWORD [rbp-8]
 	add	rax, rdx
-	mov	edx, DWORD PTR [rbp-12]
+	mov	edx, DWORD [rbp-12]
 	movsx	rdx, edx
 	mov	rcx, rdx
 	sal	rcx, 5
-	mov	rdx, QWORD PTR [rbp-24]
+	mov	rdx, QWORD [rbp-24]
 	add	rdx, rcx
-	fld	TBYTE PTR [rdx+16]
-	fstp	TBYTE PTR [rax+16]
-	sub	DWORD PTR [rbp-12], 1
+	fld	TWORD [rdx+16]
+	fstp TWORD [rax+16]
+	sub	DWORD [rbp-12], 1
 .L33:
-	cmp	DWORD PTR [rbp-12], 0
+	cmp	DWORD [rbp-12], 0
 	jg	.L34
-	mov	rax, QWORD PTR [rbp-8]
+	mov	rax, QWORD [rbp-8]
 	leave
-	.cfi_def_cfa 7, 8
 	ret
-	.cfi_endproc
-.LFE13:
-	.size	prepare_deriv_coeffs, .-prepare_deriv_coeffs
-	.ident	"GCC: (Ubuntu 5.4.0-6ubuntu1~16.04.9) 5.4.0 20160609"
-	.section	.note.GNU-stack,"",@progbits
