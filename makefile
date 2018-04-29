@@ -1,14 +1,8 @@
-all: add.o
-	gcc -g -Wall -o calc add.o
+all: calcRoot.o
+	gcc -g -Wall -o root calcRoot.o
 
-#main.o: main.c computingRootsCalc.h
-#	gcc -g -Wall -c -o main.o main.c
-
-#calcFunctions.o: calcFunctions.c computingRootsCalc.h
-#	gcc -g -Wall -c -o calcFunctions.o calcFunctions.c
-
-add.o: add.s
-	nasm -g -f elf64 -w+all -o add.o add.s
+calcRoot.o: calcRoot.s
+	nasm -g -f elf64 -w+all -o calcRoot.o calcRoot.s
 .PHONY: clean
 clean:
-	rm -f *.o calc
+	rm -f *.o root

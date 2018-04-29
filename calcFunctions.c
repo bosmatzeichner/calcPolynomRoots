@@ -9,9 +9,7 @@ complex_num calcRoot(complex_num currentRoot, struct polynom *poly, long double 
         currentRoot = eval_next_seq_element(currentRoot, poly);
         valueAtPoint = eval_poly(currentRoot,poly->coefficients,poly->order);
         printf("value at point : -----> %Lf %Lf\n", valueAtPoint.real, valueAtPoint.image);
-
     }
-    currentRoot = eval_next_seq_element(currentRoot, poly);
     free(poly->coeffsForDeriv);
     return currentRoot;
 }
@@ -25,10 +23,12 @@ complex_num eval_next_seq_element(complex_num root, struct polynom *poly) {
 int sqrtNorm_bigger_then_tolerance(complex_num funcAtPoint, long double tolerance) {
     long double sqrtNorm = eval_euclidean_sqrt_norm (funcAtPoint);
     int bool =(sqrtNorm >= tolerance*tolerance);
+    printf("sqrtNorm : -----> %.16Lf\n", sqrtNorm);
     return bool;
 }
 long double eval_euclidean_sqrt_norm(complex_num funcAtPoint) {
     long double sqrt = funcAtPoint.real*funcAtPoint.real + funcAtPoint.image*funcAtPoint.image;
+
     return sqrt;
 }
 
