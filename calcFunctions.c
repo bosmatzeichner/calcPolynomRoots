@@ -40,19 +40,19 @@ complex_num cmplx_sub(complex_num first, complex_num second){
     res.image = first.image - second.image;
     return res;
 }
-complex_num cmplx_mul(complex_num first, complex_num second){
+/*complex_num cmplx_mul(complex_num first, complex_num second){
     complex_num res={0.0 , 0.0};
     res.real = first.real*second.real - first.image*second.image;
     res.image = first.real*second.image+ second.real*first.image;
     return res;
-}
-complex_num cmplx_div(complex_num first, complex_num second){
+}*/
+/*complex_num cmplx_div(complex_num first, complex_num second){
     complex_num res={0.0 , 0.0};
     long double divisor = (second.real*second.real + second.image*second.image);
     res.real = (first.real*second.real - first.image*second.image)/divisor;
     res.image = (first.image*second.real - first.real*second.image)/divisor;
     return res;
-}
+} */
 complex_num cmplx_mul_add(complex_num res, complex_num x, complex_num coeff) {
     complex_num result = cmplx_mul(res, x);
     result = cmplx_add(result,coeff);
