@@ -131,7 +131,54 @@ eval_next_seq_element:
 	lea	rax, [rbp-112]
 	push	QWORD PTR [rbp+40]
 	push	QWORD PTR [rbp+32]
+	push	QWORD PTR [rbp+24]calcRoot:
+.LFB2:
+	.cfi_startproc
+	push	rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset 6, -16
+	mov	rbp, rsp
+	.cfi_def_cfa_register 6
+	sub	rsp, 96
+	mov	QWORD PTR [rbp-56], rdi
+	mov	QWORD PTR [rbp-64], rsi
+	mov	rax, QWORD PTR fs:40
+	mov	QWORD PTR [rbp-8], rax
+	xor	eax, eax
+	mov	rax, QWORD PTR [rbp-64]
+	mov	edx, DWORD PTR [rax]
+	mov	rax, QWORD PTR [rbp-64]
+	mov	rax, QWORD PTR [rax+8]
+	mov	esi, edx
+	mov	rdi, rax
+	call	prepare_deriv_coeffs
+	mov	rdx, rax
+	mov	rax, QWORD PTR [rbp-64]
+	mov	QWORD PTR [rax+16], rdx
+	mov	rax, QWORD PTR [rbp-64]
+	mov	edx, DWORD PTR [rax]
+	mov	rax, QWORD PTR [rbp-64]
+	mov	rcx, QWORD PTR [rax+8]
+	lea	rax, [rbp-48]
+	push	QWORD PTR [rbp+40]
+	push	QWORD PTR [rbp+32]
 	push	QWORD PTR [rbp+24]
+	push	QWORD PTR [rbp+16]
+	mov	rsi, rcx
+	mov	rdi, rax
+	call	eval_poly
+	add	rsp, 32
+	jmp	.L2
+.L3:
+	mov	rax, QWORD PTR [rbp-64]
+	push	QWORD PTR [rbp+40]
+	push	QWORD PTR [rbp+32]
+	push	QWORD PTR [rbp+24]
+	push	QWORD PTR [rbp+16]
+	mov	rsi, rax
+	lea	rdi, [rbp+16]
+	call	eval_next_seq_element
+	add	rsp, 32
 	push	QWORD PTR [rbp+16]
 	mov	rsi, rcx
 	mov	rdi, rax
