@@ -23,11 +23,11 @@ int sqrtNorm_bigger_then_tolerance(complex_num funcAtPoint, long double toleranc
     int bool =(sqrtNorm >= tolerance*tolerance);
     return bool;
 }
-
 long double eval_euclidean_sqrt_norm(complex_num funcAtPoint) {
     long double sqrt = funcAtPoint.real*funcAtPoint.real + funcAtPoint.image*funcAtPoint.image;
     return sqrt;
 }
+
 complex_num cmplx_add(complex_num first, complex_num second){
     complex_num res={0.0 , 0.0};
     res.real = first.real + second.real;
@@ -58,7 +58,6 @@ complex_num cmplx_mul_add(complex_num res, complex_num x, complex_num coeff) {
     result = cmplx_add(result,coeff);
     return result;
 }
-
 complex_num eval_element(complex_num nthZ, complex_num polyAtPointZ, complex_num derivAtPointZ){
     complex_num divPolyByDeriv = cmplx_div(polyAtPointZ, derivAtPointZ);
     complex_num nextElemnt = cmplx_sub(nthZ, divPolyByDeriv);
@@ -73,7 +72,6 @@ complex_num eval_poly(complex_num x, complex_num *coeffs, int order){
     }
     return res;
 }
-
 complex_num *prepare_deriv_coeffs(complex_num *coeffs , int order){
     complex_num *coefsPrepared = calloc((order+1), sizeof(complex_num));
     for (int i = order; i>0; i-- ){
