@@ -18,6 +18,7 @@ complex_num eval_next_seq_element(complex_num root, struct polynom *poly) {
     complex_num nextElement = eval_element(root,valueAtPoint,derivAtPoint);
     return nextElement;
 }
+
 int sqrtNorm_bigger_then_tolerance(complex_num funcAtPoint, long double tolerance) {
     long double sqrtNorm = eval_euclidean_sqrt_norm (funcAtPoint);
     int bool =(sqrtNorm >= tolerance*tolerance);
@@ -34,12 +35,12 @@ long double eval_euclidean_sqrt_norm(complex_num funcAtPoint) {
     res.image = first.image + second.image;
     return res;
 }*/
-complex_num cmplx_sub(complex_num first, complex_num second){
+/*complex_num cmplx_sub(complex_num first, complex_num second){
     complex_num res={0.0 , 0.0};
     res.real = first.real - second.real;
     res.image = first.image - second.image;
     return res;
-}
+}*/
 /*complex_num cmplx_mul(complex_num first, complex_num second){
     complex_num res={0.0 , 0.0};
     res.real = first.real*second.real - first.image*second.image;

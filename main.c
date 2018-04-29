@@ -54,5 +54,5 @@ complex_num createInitialVal() {
     return initial_val;
 }
 void execute_print(complex_num root) {
-    printf("root = %.16Lf %.16Lf", root.real, root.image);
+    printf("root = %.16Lf %.16Lf\n", root.real, root.image);
 }
