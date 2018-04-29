@@ -20,16 +20,6 @@ struct input{
     struct polynom *poly;
 };
 
-
-
-
-
-
-
-
-
-
-
 //Main-----------------------
 extern int main();
 extern void execute_print(complex_num root);
