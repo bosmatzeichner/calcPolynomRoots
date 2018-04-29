@@ -28,12 +28,12 @@ long double eval_euclidean_sqrt_norm(complex_num funcAtPoint) {
     return sqrt;
 }
 
-complex_num cmplx_add(complex_num first, complex_num second){
+/*complex_num cmplx_add(complex_num first, complex_num second){
     complex_num res={0.0 , 0.0};
     res.real = first.real + second.real;
     res.image = first.image + second.image;
     return res;
-}
+}*/
 complex_num cmplx_sub(complex_num first, complex_num second){
     complex_num res={0.0 , 0.0};
     res.real = first.real - second.real;

@@ -35,7 +35,7 @@ complex_num createInitialVal();
 //Calc----------------------
 long double eval_euclidean_sqrt_norm(complex_num root);
 complex_num calcRoot(complex_num currentRoot, struct polynom *poly, long double tolerance) ;
-complex_num cmplx_add(complex_num first, complex_num second);
+extern complex_num cmplx_add(complex_num first, complex_num second);
 complex_num cmplx_sub(complex_num first, complex_num second);
 complex_num cmplx_mul(complex_num first, complex_num second);
 complex_num cmplx_div(complex_num first, complex_num second);
