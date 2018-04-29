@@ -19,19 +19,29 @@ struct input{
     complex_num initial_val;
     struct polynom *poly;
 };
+
+
+
+
+
+
+
+
+
+
+
 //Main-----------------------
-int main();
-void execute_print(complex_num root);
+extern int main();
+extern void execute_print(complex_num root);
 
-void free_input(struct input *parameters);
-struct input *getInput() ;
+extern void free_input(struct input *parameters);
+extern struct input *getInput() ;
 
-long double createParamTolerance() ;
-int createParamOrder() ;
-complex_num *createParamCoefficients(int order) ;
-void initCoeff(complex_num* coeffs, int order);
-//complex_num createComplexNum() ;
-complex_num createInitialVal();
+extern long double createParamTolerance() ;
+extern int createParamOrder() ;
+extern complex_num *createParamCoefficients(int order) ;
+extern void initCoeff(complex_num* coeffs, int order);
+extern complex_num createInitialVal();
 //Calc----------------------
 extern complex_num cmplx_add(complex_num first, complex_num second);
 extern complex_num cmplx_sub(complex_num first, complex_num second);

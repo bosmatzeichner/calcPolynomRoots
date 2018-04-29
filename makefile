@@ -1,12 +1,13 @@
-all: main.o calcFunctions.o add.o
-	gcc -g -Wall -o calc main.o calcFunctions.o add.o
-main.o: main.c computingRootsCalc.h
-	gcc -g -Wall -c -o main.o main.c
+all: add.o
+	gcc -g -Wall -o calc add.o
 
-calcFunctions.o: calcFunctions.c computingRootsCalc.h
-	gcc -g -Wall -c -o calcFunctions.o calcFunctions.c
+#main.o: main.c computingRootsCalc.h
+#	gcc -g -Wall -c -o main.o main.c
 
-add.o: add.s computingRootsCalc.h
+#calcFunctions.o: calcFunctions.c computingRootsCalc.h
+#	gcc -g -Wall -c -o calcFunctions.o calcFunctions.c
+
+add.o: add.s
 	nasm -g -f elf64 -w+all -o add.o add.s
 .PHONY: clean
 clean:

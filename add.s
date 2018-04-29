@@ -1,4 +1,28 @@
+section .data
+
+tolerance:
+        db "epsilon = %Lf",10,0
+order:
+        db "order = %d" ,10,0
+coeff:
+        db "coeff %d = %Lf %Lf" ,10,0
+initial:
+        db "initial = %Lf %Lf" ,0
+root:
+        db "root = %.16Lf %.16Lf" ,10 ,0
+
 section .text
+    global main
+
+    global createParamTolerance
+    global createParamOrder
+    global createParamCoefficients
+    global initCoeff
+    global createInitialVal
+    global execute_print
+    global getInput
+    global free_input
+
     global cmplx_add
     global cmplx_sub
     global cmplx_mul
@@ -13,6 +37,257 @@ section .text
     global calcRoot
     extern calloc
     extern free
+    extern scanf
+    extern printf
+
+main:
+        push    rbp
+        mov     rbp, rsp
+        sub     rsp, 48
+        mov     eax, 0
+        call    getInput
+        mov     QWORD [rbp-8], rax
+        mov     rax, QWORD [rbp-8]
+        fld     TWORD [rax]
+        mov     rax, QWORD [rbp-8]
+        mov     rcx, QWORD [rax+48]
+        lea     rdx, [rbp-48]
+        lea     rsp, [rsp-16]
+        fstp    TWORD [rsp]
+        mov     rax, QWORD [rbp-8]
+        push    QWORD [rax+40]
+        push    QWORD [rax+32]
+        push    QWORD [rax+24]
+        push    QWORD [rax+16]
+        mov     rsi, rcx
+        mov     rdi, rdx
+        call    calcRoot
+        add     rsp, 48
+        push    QWORD [rbp-24]
+        push    QWORD [rbp-32]
+        push    QWORD [rbp-40]
+        push    QWORD [rbp-48]
+        call    execute_print
+        add     rsp, 32
+        mov     rax, QWORD [rbp-8]
+        mov     rdi, rax
+        call    free_input
+        mov     eax, 0
+        leave
+        ret
+
+createParamTolerance:
+        push    rbp
+        mov     rbp, rsp
+        sub     rsp, 16
+        fldz
+        fstp    TWORD [rbp-16]
+        lea     rax, [rbp-16]
+        mov     rsi, rax
+        mov     rdi, QWORD tolerance
+        mov     rax, 0
+        call    scanf
+        fld     TWORD [rbp-16]
+        leave
+        ret
+
+createParamOrder:
+        push    rbp
+        mov     rbp, rsp
+        sub     rsp, 16
+        mov     DWORD [rbp-4], 0
+        lea     rsi, [rbp-4]
+        mov     edi, order
+        mov     eax, 0
+        call    scanf
+        mov     eax, DWORD [rbp-4]
+        leave
+        ret
+
+createParamCoefficients:
+        push    rbp
+        mov     rbp, rsp
+        sub     rsp, 32
+        mov     DWORD [rbp-20], edi ; edi=order
+        mov     eax, DWORD [rbp-20]
+        add     eax, 1 ; order + 1 for free coeff
+        cdqe
+        mov     esi, 32 ; sizeof cmplxnum
+        mov     rdi, rax ; the extended eax = order+1
+        call    calloc
+        mov     QWORD [rbp-8], rax ; coeffs 
+        mov     edx, DWORD [rbp-20] ; order
+        mov     rax, QWORD [rbp-8] ; coeffs 
+        mov     esi, edx
+        mov     rdi, rax
+        call    initCoeff
+        mov     rax, QWORD [rbp-8]
+        leave
+        ret
+
+initCoeff:
+        push    rbp
+        mov     rbp, rsp
+        sub     rsp, 64
+        mov     QWORD [rbp-56], rdi ; coeffs 
+        mov     DWORD [rbp-60], esi ; order
+        jmp     .condition
+.loop:
+        lea     rax, [rbp-48]
+        lea     rcx, [rax+16]
+        lea     rdx, [rbp-48]
+        lea     rax, [rbp-4]
+        mov     rsi, rax
+        mov     edi, coeff
+        mov     eax, 0
+        call    scanf
+        mov     eax, DWORD [rbp-4]
+        cdqe
+        sal     rax, 5
+        mov     rdx, rax
+        mov     rax, QWORD [rbp-56]
+        lea     rcx, [rdx+rax]
+        mov     rax, QWORD [rbp-48]
+        mov     rdx, QWORD [rbp-40]
+        mov     QWORD [rcx], rax
+        mov     QWORD [rcx+8], rdx
+        mov     rax, QWORD [rbp-32]
+        mov     rdx, QWORD [rbp-24]
+        mov     QWORD [rcx+16], rax
+        mov     QWORD [rcx+24], rdx
+        sub     DWORD [rbp-60], 1
+.condition:
+        cmp     DWORD [rbp-60], 0
+        jns     .loop
+        nop
+        leave
+        ret
+
+createInitialVal:
+        push    rbp
+        mov     rbp, rsp
+        sub     rsp, 48
+        mov     QWORD [rbp-40], rdi
+        fldz
+        fstp    TWORD [rbp-32]
+        fldz
+        fstp    TWORD [rbp-16]
+
+        lea     rax, [rbp-32] ; image
+        lea     rdx, [rbp-16] ; real
+        mov     rsi, rax
+        mov     edi, initial
+        mov     eax, 0
+        call    scanf
+        mov     rcx, QWORD  [rbp-40]
+        mov     rax, QWORD  [rbp-32]
+        mov     rdx, QWORD  [rbp-24]
+        mov     QWORD  [rcx], rax
+        mov     QWORD  [rcx+8], rdx
+        mov     rax, QWORD  [rbp-16]
+        mov     rdx, QWORD  [rbp-8]
+        mov     QWORD  [rcx+16], rax
+        mov     QWORD  [rcx+24], rdx
+        mov     rax, QWORD  [rbp-40]
+        leave
+        ret
+
+execute_print:
+        push    rbp
+        mov     rbp, rsp
+        fld     TWORD  [rbp+16]
+        fld     TWORD  [rbp+32]
+        lea     rsp, [rsp-16]
+        fstp    TWORD  [rsp]
+        lea     rsp, [rsp-16]
+        fstp    TWORD [rsp]
+        mov     edi, root
+        mov     eax, 0
+        call    printf
+        add     rsp, 32
+        nop
+        leave
+        ret
+
+getInput:
+        push    rbp
+        mov     rbp, rsp
+        push    rbx
+        sub     rsp, 72
+        mov     esi, 64
+        mov     edi, 1
+        call    calloc ;;;;;;;; size of input struct
+        mov     QWORD [rbp-24], rax
+        mov     esi, 24
+        mov     edi, 1
+        call    calloc ;;;;;;; size of polynom struct
+        mov     rdx, rax
+        mov     rax, QWORD [rbp-24]
+        mov     QWORD [rax+48], rdx
+        mov     rax, QWORD [rbp-24]
+        mov     rax, QWORD [rax+48]
+        mov     QWORD [rbp-32], rax
+        mov     eax, 0
+        call    createParamTolerance ;;;;;;createParamTolerance
+        fstp    TWORD [rbp-80]
+        mov     rax, QWORD [rbp-80]
+        mov     edx, DWORD [rbp-72]
+        mov     rcx, QWORD [rbp-24]
+        mov     QWORD [rcx], rax
+        mov     DWORD [rcx+8], edx
+        mov     eax, 0
+        call    createParamOrder ;;;;;;;createParamOrder
+        mov     edx, eax
+        mov     rax, QWORD [rbp-32]
+        mov     DWORD [rax], edx
+        mov     rax, QWORD [rbp-32]
+        mov     eax, DWORD [rax]
+        mov     edi, eax
+        call    createParamCoefficients ;;;;;;createParamCoefficients
+        mov     rdx, rax
+        mov     rax, QWORD [rbp-32]
+        mov     QWORD [rax+8], rdx ; to coeffs
+        mov     rbx, QWORD [rbp-24]
+        lea     rax, [rbp-64]
+        mov     rdi, rax
+        mov     eax, 0
+        call    createInitialVal ;;;;;;createInitialVal
+        mov     rax, QWORD [rbp-64]
+        mov     rdx, QWORD [rbp-56]
+        mov     QWORD [rbx+16], rax
+        mov     QWORD [rbx+24], rdx
+        mov     rax, QWORD [rbp-48]
+        mov     rdx, QWORD [rbp-40]
+        mov     QWORD [rbx+32], rax
+        mov     QWORD [rbx+40], rdx
+        mov     rax, QWORD [rbp-24]
+        add     rsp, 72
+        pop     rbx
+        pop     rbp
+        ret
+
+free_input:
+        push    rbp
+        mov     rbp, rsp
+        sub     rsp, 16
+        mov     QWORD [rbp-8], rdi
+        mov     rax, QWORD [rbp-8]
+        mov     rax, QWORD [rax+48]
+        mov     rax, QWORD [rax+8]
+        mov     rdi, rax
+        call    free
+        mov     rax, QWORD [rbp-8]
+        mov     rax, QWORD [rax+48]
+        mov     rdi, rax
+        call    free
+        mov     rax, QWORD [rbp-8]
+        mov     rdi, rax
+        call    free
+        nop
+        leave
+        ret
+
+
 
 cmplx_add:
     push rbp
@@ -553,3 +828,4 @@ calcRoot:
         mov     rax, QWORD  [rbp-40]
         leave
         ret
+
