@@ -8,7 +8,7 @@ complex_num calcRoot(complex_num currentRoot, struct polynom *poly, long double 
     while(sqrtNorm_bigger_then_tolerance(valueAtPoint, tolerance)>0){
         currentRoot = eval_next_seq_element(currentRoot, poly);
         valueAtPoint = eval_poly(currentRoot,poly->coefficients,poly->order);
-        printf("value at point : -----> %Lf %Lf\n", valueAtPoint.real, valueAtPoint.image);
+        printf("value at point : -----> %.16Lf %.16Lf\n", valueAtPoint.real, valueAtPoint.image);
     }
     free(poly->coeffsForDeriv);
     return currentRoot;
@@ -80,7 +80,7 @@ complex_num *prepare_deriv_coeffs(complex_num *coeffs , int order){
     complex_num *coefsPrepared = calloc((order+1), sizeof(complex_num));
     for (int i = order; i>0; i-- ){
         coefsPrepared[i-1].real = coeffs[i].real * i;
-        coefsPrepared[i-1].image = coeffs[i].image;
+        coefsPrepared[i-1].image = coeffs[i].image * i;
     }
     return  coefsPrepared;
 }
